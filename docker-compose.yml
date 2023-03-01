@@ -1,0 +1,19 @@
+version: '3.4'
+services:
+  database:
+    image: 'postgres'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: igork
+      POSTGRES_PASSWORD: qwery3333
+      POSTGRES_DB: igork 
+  testtask:
+    image: testtask
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
