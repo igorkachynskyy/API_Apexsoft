@@ -1,0 +1,10 @@
+{
+    "dev": {
+      "driver": "pg",
+      "user": "igork",
+      "password": "qwery3333",
+      "host": "localhost",
+      "database": "igork",
+      "port": 5432
+    }
+  }
