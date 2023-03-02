@@ -1,21 +1,20 @@
 CREATE TABLE users (
     name_ varchar(255) NOT NULL,
-    email varchar(255) NOT NULL,
+    email varchar(255) NOT NULL UNIQUE,
     password_ varchar(255) NOT NULL,
     is_deleted BOOLEAN NOT NULL,
-    created_at date DEFAULT NOW(),
-    updated_at date UNIQUE
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
-CREATE OR REPLACE FUNCTION user_change() RETURNS TRIGGER as $user_change$
+CREATE OR REPLACE FUNCTION user_change() RETURNS TRIGGER AS $$
 BEGIN
-   if new."password" not like new."password" then
-      insert into users values(OLD."name_", OLD."email", NEW."password_", OLD."is_deleted", OLD."created_at", GETDATE());
-   end if;
-   return new;
+  NEW.updated_at = NOW();
+RETURN NEW;
 END;
-$user_change$
-language PLPGSQL;
+$$ LANGUAGE plpgsql;
+
 CREATE TRIGGER changed_trigger 
-BEFORE UPDATE ON users
+BEFORE
+UPDATE ON users
 FOR EACH ROW
 EXECUTE PROCEDURE user_change();
