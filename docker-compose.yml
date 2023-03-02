@@ -12,7 +12,7 @@ services:
     image: testtask
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: .\DockerFile
     environment:
       NODE_ENV: production
     ports:
