@@ -1,10 +1,15 @@
 FROM node:lts-alpine
 ENV NODE_ENV=production
 WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+COPY package.json package-lock.json* npm-shrinkwrap.json* ./
 RUN npm install
 COPY . .
 EXPOSE 3000
-RUN chown -R node /usr/src/app
-USER node
-CMD ["npm", "start"]
+COPY docker-entrypoint.sh /
+#RUN chown -R node /usr/src/app
+RUN chmod +x /usr/src/app/docker-entrypoint.sh
+ENTRYPOINT [ "sh" ]
+#USER node
+CMD ["./docker-entrypoint.sh"]
+#ENTRYPOINT ["source","/usr/src/app/docker-entrypoint.sh"]
+#CMD ["npm", "start"]

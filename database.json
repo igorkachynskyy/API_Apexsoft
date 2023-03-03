@@ -3,7 +3,7 @@
       "driver": "pg",
       "user": "igork",
       "password": "qwery3333",
-      "host": "localhost",
+      "host": "database",
       "database": "igork",
       "port": 5432
     }
