@@ -5,9 +5,9 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: igork
-      POSTGRES_PASSWORD: qwery3333
-      POSTGRES_DB: igork 
+      POSTGRES_USER: ${USER}
+      POSTGRES_PASSWORD: ${PASSWORD}
+      POSTGRES_DB: ${DATABASE}
   testtask:
     image: testtask
     build:
